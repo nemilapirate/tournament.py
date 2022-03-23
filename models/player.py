@@ -1,11 +1,11 @@
 
 
 class Player:
-    def __init__(self, name, first_name, dob, sex, total_score, rank=0):
+    def __init__(self, name, first_name, dateofbirth, gender, total_score, rank=0):
         self.name = name
         self.first_name = first_name
-        self.dob = dob
-        self.sex = sex
+        self.dateofbirth = dateofbirth
+        self.gender = gender
         self.total_score = total_score
         self.tournament_score = 0
         self.rank = rank
@@ -18,8 +18,8 @@ class Player:
         serialized_player = {
             "name": self.name,
             "first_name": self.first_name,
-            "dob": self.dob,
-            "sex": self.sex,
+            "dateofbirth": self.dateofbirth,
+            "gender": self.gender,
             "total_score": self.total_score,
             "rank": self.rank,
         }

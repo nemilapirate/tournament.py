@@ -1,26 +1,26 @@
-from views.view import View
-from controller.timestamp import get_timestamp
+from views.setting import Setting
+from controller.timesetting import get_timesetting
 from controller.database import load_db
 
 
-class CreateTournament(View):
+class CreateTournament(Setting):
 
     def display_menu(self):
 
-        date = get_timestamp()
+        date = get_timesetting()
         print("-"*15 + "Création d'un nouveau tournoi : " + date + "-"*15)
 
         name = input("Nom du tournoi:\n")
 
-        place = self.get_user_entry(
+        location = self.get_user_entry(
             msg_display="Lieu:\n",
-            msg_error="Veuillez entrer un lieu valide",
+            msg_error="Lieu invalide",
             value_type="string"
         )
 
         user_selection_time_control = self.get_user_entry(
             msg_display="Contrôle de temps:\n1 - Bullet\n2 - Blitz\n3 - Coup Rapide\n",
-            msg_error="Veuillez entrer 1, 2 ou 3.",
+            msg_error="Selection invalide (entrer 1, 2 ou 3.)",
             value_type="selection",
             assertions=[ "1", "2", "3"]
         )
@@ -33,31 +33,31 @@ class CreateTournament(View):
 
         nb_players = self.get_user_entry(
             msg_display="Nombre de joueurs:\n",
-            msg_error="Veuillez entrer un nombre entier supérieur ou égal à 2.",
+            msg_error="Entrée invalide (Entrer un chiffre supérieur ou égal à 2.)",
             value_type="num_superior",
             default_value=2
         )
 
         nb_rounds = self.get_user_entry(
             msg_display="Nombre de tours (4 par défaut):\n",
-            msg_error="Veuillez entrer 4 ou plus.",
+            msg_error="Entrée invalide (4 par défaut).",
             value_type="num_superior",
             default_value=4
         )
-        desc = input("Description du tournoi:\n")
+        description = input("Description du tournoi:\n")
 
         return {
             "name": name,
-            "place": place,
+            "location": location,
             "date": date,
             "time_control": time_control,
             "nb_players": nb_players,
             "nb_rounds": nb_rounds,
-            "desc": desc
+            "description": description
         }
 
 
-class LoadTournament(View):
+class LoadTournament(Setting):
 
     def display_menu(self):
 

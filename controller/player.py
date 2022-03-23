@@ -12,8 +12,8 @@ def create_player():
     player = Player(
         user_entries['name'],
         user_entries['first_name'],
-        user_entries['dob'],
-        user_entries['sex'],
+        user_entries['dateofbirth'],
+        user_entries['gender'],
         user_entries['total_score'],
         user_entries['rank'])
 

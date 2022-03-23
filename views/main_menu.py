@@ -4,10 +4,10 @@ from controller.tournament import create_tournament, play_tournament
 
 from views.report import Report
 from views.tournament import LoadTournament
-from views.view import View
+from views.setting import Setting
 
 
-class MainMenu(View):
+class MainMenu(Setting):
 
     def display_main_menu(self):
 

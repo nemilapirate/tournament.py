@@ -1,8 +1,8 @@
-from views.view import View
+from views.setting import Setting
 from controller.database import load_db
 
 
-class CreatePlayer(View):
+class CreatePlayer(Setting):
 
     def display_menu(self):
         print("-"*20 + " Création d'un joueur " + "-"*20)
@@ -10,14 +10,14 @@ class CreatePlayer(View):
 
         first_name = input("Prénom du joueur :\n ")
 
-        dob = self.get_user_entry(
+        dateofbirth = self.get_user_entry(
             msg_display="Date de naissance (format DD-MM-YYYY):\n",
             msg_error="Veuillez entrer une date au format valide: DD-MM-YYYY",
             value_type="date"
         )
 
-        sex = self.get_user_entry(
-            msg_display="Sexe (H ou F):\n",
+        gender = self.get_user_entry(
+            msg_display="Genre [ H ] ou  F ]:\n",
             msg_error="Veuillez entrer H ou F",
             value_type="selection",
             assertions=["H", "h", "F", "f"]
@@ -34,14 +34,14 @@ class CreatePlayer(View):
         return {
             "name": name,
             "first_name": first_name,
-            "dob": dob,
-            "sex": sex,
+            "dateofbirth": dateofbirth,
+            "gender": gender,
             "total_score": 0,
             "rank": rank,
         }
 
 
-class LoadPlayer(View):
+class LoadPlayer(Setting):
 
     def display_menu(self, nb_players_to_load):
 

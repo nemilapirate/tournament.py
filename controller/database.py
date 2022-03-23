@@ -1,6 +1,7 @@
 from pathlib import Path
 from tinydb import TinyDB
 from tinydb import where
+
 from models.player import Player
 from models.tournament import Tournament
 from models.round import Round
@@ -26,7 +27,7 @@ def update_db(db_name, serialized_data):
         serialized_data,
         where('name') == serialized_data['name']
     )
-    # print(f"{serialized_data['name']} mis à jour.")
+
 
 # Mise à jour du joeur
 def update_player_rank(db_name, serialized_data):
@@ -35,7 +36,7 @@ def update_player_rank(db_name, serialized_data):
             {'rank': serialized_data['rank'], 'total_score': serialized_data['total_score']},
             where('name') == serialized_data['name']
     )
-    # print(f"{serialized_data['name']}  à bien été mis mis à jour.")
+
 
 
 def load_db(db_name):
@@ -47,8 +48,8 @@ def load_player(serialized_player, load_tournament_score=False):
     player = Player(
         serialized_player["name"],
         serialized_player["first_name"],
-        serialized_player["dob"],
-        serialized_player["sex"],
+        serialized_player["dateofbirth"],
+        serialized_player["gender"],
         serialized_player["total_score"],
         serialized_player["rank"]
     )
@@ -60,12 +61,12 @@ def load_player(serialized_player, load_tournament_score=False):
 def load_tournament(serialized_tournament):
     loaded_tournament = Tournament(
         serialized_tournament["name"],
-        serialized_tournament["place"],
+        serialized_tournament["location"],
         serialized_tournament["date"],
         serialized_tournament["time_control"],
         [load_player(player, load_tournament_score=True) for player in serialized_tournament["players"]],
         serialized_tournament["nb_rounds"],
-        serialized_tournament["desc"]
+        serialized_tournament["description"]
     )
     loaded_tournament.rounds = load_rounds(serialized_tournament, loaded_tournament)
 

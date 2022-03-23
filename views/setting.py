@@ -1,6 +1,6 @@
 
 
-class View:
+class Setting:
 
     def get_user_entry(self, msg_display, msg_error, value_type, assertions=None, default_value=None):
         while True:

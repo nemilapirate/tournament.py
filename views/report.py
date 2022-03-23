@@ -1,9 +1,9 @@
 from controller.database import load_db
-from views.view import View
+from views.setting import Setting
 from operator import itemgetter
 
 
-class Report(View):
+class Report(Setting):
 
     def __init__(self):
         self.players = load_db("players")
@@ -12,10 +12,6 @@ class Report(View):
     def display_players_report(self, players=[]):
 
         print("-"*20 + " Rapports " + "-"*20)
-
-        # Si on veux afficher les joueurs classés d'un tournoi en particulier, on passe True à
-        # tournaments_player et on donne une liste de joueurs en arguement.
-        # Si on ne précise rien, c'est tout les joueurs enregistrés dans la bdd qui seront chargés.
 
         players = players
 
@@ -27,7 +23,6 @@ class Report(View):
             print("-"*20 + " Classement " + "-"*20)
 
             # Affichage du classement
-            # Choix d'un joueur dans le classement afin de voir ses détails
             user_input = self.get_user_entry(
                 msg_display=builded_selection['msg'] + "q - Quitter\n> ",
                 msg_error="Veuillez faire un choix valide.",
@@ -43,17 +38,17 @@ class Report(View):
 
                 # Affichage des détails du joueur
                 while True:
-                    print(f"Détails du joueur {selected_player['name']}:")
-                    print(f"Rang: {selected_player['rank']}\n"
-                          f"Score total: {selected_player['total_score']}\n"
-                          f"Nom: {selected_player['name']}\n"
+                    print(f"Informations sur le joueur {selected_player['name']}:")
+                    print(f"Nom: {selected_player['name']}\n"
                           f"Prénom: {selected_player['first_name']}\n"
-                          f"Date de naissance: {selected_player['dob']}\n"
-                          f"Sexe: {selected_player['sex']}\n"
+                          f"Date de naissance: {selected_player['dateofbirth']}\n"
+                          f"Genre: {selected_player['gender']}\n"
+                          f"Rang: {selected_player['rank']}\n"
+                          f"Score total: {selected_player['total_score']}\n"
                           )
 
                     user_input = self.get_user_entry(
-                        msg_display="q - Quitter\n> ",
+                        msg_display="q - Quitter\n",
                         msg_error="Veuillez faire un choix valide.",
                         value_type="selection",
                         assertions=["q"]
@@ -73,8 +68,6 @@ class Report(View):
             print("-"*20 + " Tournoi " + "-"*20)
 
             # Affichage de tout les tournois
-            # Choix d'un tournoi afin d'en voir les détails
-
             user_input = self.get_user_entry(
                 msg_display=builded_selection['msg'] + "q - Quitter \n> ",
                 msg_error="Veuillez faire un choix valide.",
@@ -89,7 +82,6 @@ class Report(View):
                 selected_tournament = self.tournaments[int(user_input) - 1]
 
                 # Affichage des détails du tournoi choisi
-
                 while True:
                     print(f"Détails du tournoi {selected_tournament['name']}\n"
                           f"Nom: {selected_tournament['name']}\n"

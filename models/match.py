@@ -1,5 +1,5 @@
-import random
-from views.view import View
+
+from views.setting import Setting
 
 
 class Match:
@@ -21,12 +21,12 @@ class Match:
 
         # Match joué, on rentre les scores
         print()
-        winner = View().get_user_entry(
-            msg_display=f"{self.player1.name} VS " +
-                        f"{self.player2.name} \n"
+        winner = Setting().get_user_entry(
+            msg_display=f"{self.player1.first_name} VS " +
+                        f"{self.player2.first_name} \n"
                         f"Qui est le gagnant ?\n"
-                        f"1 - {self.player1.name} \n"
-                        f"2 - {self.player2.name} \n"
+                        f"1 - {self.player1.first_name} \n"
+                        f"2 - {self.player2.first_name} \n"
                         f"0 - Egalite\n",
             msg_error="Veuillez entrer 0, 1 ou 2.",
             value_type="selection",
@@ -34,10 +34,10 @@ class Match:
         )
 
         if winner == "1":
-            self.winner = self.player1.name
+            self.winner = self.player1.first_name
             self.score_player1 += 1
         elif winner == "2":
-            self.winner = self.player2.name
+            self.winner = self.player2.first_name
             self.score_player2 += 1
         elif winner == "0":
             self.winner = "Egalite"

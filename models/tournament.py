@@ -2,15 +2,15 @@ from models.round import Round
 
 
 class Tournament:
-    def __init__(self, name, place, date, time_control, players, nb_rounds=4, desc=""):
+    def __init__(self, name, location, date, time_control, players, nb_rounds=4, description=""):
         self.name = name
-        self.place = place
+        self.location = location
         self.date = date
         self.time_control = time_control
         self.players = players
         self.nb_rounds = nb_rounds
         self.rounds = []
-        self.desc = desc
+        self.description = description
 
     def __str__(self):
         return f"Tournoi: {self.name}"
@@ -104,13 +104,13 @@ class Tournament:
         # Si sauvegarde juste après création, les rounds ne sont pas encore créés.
         serialized_tournament = {
             "name": self.name,
-            "place": self.place,
+            "location": self.location,
             "date": self.date,
             "time_control": self.time_control,
             "players": [player.get_serialized_player(save_turnament_score=True) for player in self.players],
             "nb_rounds": self.nb_rounds,
             "rounds": [round.get_serialized_round() for round in self.rounds],
-            "desc": self.desc
+            "description": self.description
         }
 
         if save_rounds:

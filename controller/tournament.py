@@ -1,5 +1,5 @@
 from models.tournament import Tournament
-from views.view import View
+from views.setting import Setting
 from views.tournament import CreateTournament, LoadTournament
 from views.player import LoadPlayer
 from controller.player import create_player, update_rankings
@@ -8,7 +8,7 @@ from controller.database import save_db, update_db, load_player, load_tournament
 
 def create_tournament():
 
-    menu = View()
+    menu = Setting()
     # Récupération des infos du tournoi
     user_entries = CreateTournament().display_menu()
 
@@ -46,12 +46,12 @@ def create_tournament():
     # Creation du tournoi
     tournament = Tournament(
         user_entries['name'],
-        user_entries['place'],
+        user_entries['location'],
         user_entries['date'],
         user_entries['time_control'],
         players,
         user_entries['nb_rounds'],
-        user_entries['desc'])
+        user_entries['description'])
 
     # Save du tournoi dans la bdd
     save_db("tournaments", tournament.get_serialized_tournament())
@@ -61,7 +61,7 @@ def create_tournament():
 
 def play_tournament(tournament, new_tournament_loaded=False):
 
-    menu = View()
+    menu = Setting()
     print()
     print(f"Début du tournoi {tournament.name}")
     print()

@@ -1,4 +1,4 @@
-from controller.timestamp import get_timestamp
+from controller.timesetting import get_timesetting
 from models.match import Match
 
 
@@ -15,7 +15,7 @@ class Round:
         else:
             self.matchs = self.create_matchs()
 
-        self.start_date = get_timestamp()
+        self.start_date = get_timesetting()
         self.end_date = ""
 
     def __str__(self):
@@ -28,9 +28,9 @@ class Round:
         return matchs
 
     def mark_as_complete(self):
-        self.end_date = get_timestamp()
+        self.end_date = get_timesetting()
         print(f"{self.end_date} : {self.name} terminé.")
-        print("Rentrer les résultats des matchs:")
+        print("Résultats des matchs:")
         for match in self.matchs:
             match.play_match()
 
